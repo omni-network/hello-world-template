@@ -6,7 +6,7 @@
 forge build
 
 # import env variables
-source script/bash/env.sh
+source script/bash/.env.example
 
 # Omni Deployment
 export GLOBAL_GREETER_ADDRESS=$(forge script DeployGlobalGreeter --broadcast --rpc-url $OMNI_RPC_URL --private-key $PRIVATE_KEY | grep "Contract Address:" | awk '{ print $3 }')
