@@ -29,8 +29,12 @@ contract GlobalGreeter is XApp {
      *      It updates the lastGreet variable with information about the received greeting.
      */
     function greet(string calldata _greeting) external xrecv {
-        // Calculate the fee for the cross-chain call
-        uint256 fee = feeFor(omni.chainId(), abi.encodeWithSelector(this.greet.selector, _greeting));
+        // Initialize the fee to 0, for local calls
+        uint256 fee = 0;
+        if (isXCall() && xmsg.sourceChainId != omni.chainId()) {
+            // Calculate the fee for the cross-chain call
+            fee = feeFor(xmsg.sourceChainId, abi.encodeWithSelector(this.greet.selector, _greeting));
+        }
 
         // Create a Greeting struct to store information about the received greeting
         Greeting memory greeting = Greeting(omni.chainId(), block.timestamp, fee, msg.sender, xmsg.sender, _greeting);
