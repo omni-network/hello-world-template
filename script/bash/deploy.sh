@@ -21,7 +21,7 @@ export ARB_ROLLUP_GREETER_ADDRESS=$(forge script DeployRollupGreeter --broadcast
 echo "Deployed ARB RollupGreeter..."
 
 # Summary
-echo "\nDeployment Summary:"
+echo "Deployment Summary:"
 echo "Global Greeter Address: $GLOBAL_GREETER_ADDRESS"
 echo "OP Rollup Greeter Address: $OP_ROLLUP_GREETER_ADDRESS"
 echo "ARB Rollup Greeter Address: $ARB_ROLLUP_GREETER_ADDRESS"
