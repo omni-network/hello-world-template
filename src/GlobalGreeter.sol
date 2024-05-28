@@ -37,7 +37,7 @@ contract GlobalGreeter is XApp {
         }
 
         // Create a Greeting struct to store information about the received greeting
-        Greeting memory greeting = Greeting(omni.chainId(), block.timestamp, fee, msg.sender, xmsg.sender, _greeting);
+        Greeting memory greeting = Greeting(xmsg.sourceChainId, block.timestamp, fee, msg.sender, xmsg.sender, _greeting);
 
         // Update the lastGreet variable with the information about the received greeting
         lastGreet = greeting;

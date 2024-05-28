@@ -31,9 +31,9 @@ echo "ARB Rollup Greeter Address: $ARB_ROLLUP_GREETER_ADDRESS"
 # Testing the contracts - uncomment the following lines and copy them to your terminal to test the contracts
 # ----------------------------------------------------------------
 
-# export GLOBAL_GREETER_ADDRESS=0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82
-# export OP_ROLLUP_GREETER_ADDRESS=0xa513E6E4b8f2a923D98304ec87F64353C4D5C853
-# export ARB_ROLLUP_GREETER_ADDRESS=0xa513E6E4b8f2a923D98304ec87F64353C4D5C853
+# export GLOBAL_GREETER_ADDRESS=0x8464135c8F25Da09e49BC8782676a84730C318bC
+# export OP_ROLLUP_GREETER_ADDRESS=0x8464135c8F25Da09e49BC8782676a84730C318bC
+# export ARB_ROLLUP_GREETER_ADDRESS=0x8464135c8F25Da09e49BC8782676a84730C318bC
 # cast call $GLOBAL_GREETER_ADDRESS "lastGreet():(uint64,uint256,uint256,address,address,string)" --rpc-url $OMNI_RPC_URL
 # cast send $GLOBAL_GREETER_ADDRESS "greet(string)" "testtest" --private-key $PRIVATE_KEY --rpc-url $OMNI_RPC_URL
 # cast call $GLOBAL_GREETER_ADDRESS "lastGreet():(uint64,uint256,uint256,address,address,string)" --rpc-url $OMNI_RPC_URL
