@@ -27,8 +27,8 @@ jobs:
 
       - name: List directories for debugging
         run: |
-          echo "Listing lib/omni:"
-          ls -R lib/omni
+          echo "Listing lib/omni/contracts:"
+          ls -R lib/omni/contracts
           echo "Listing lib/forge-std:"
           ls -R lib/forge-std
 
