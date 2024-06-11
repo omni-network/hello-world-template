@@ -2,6 +2,7 @@
 pragma solidity ^0.8.23;
 
 import {XApp} from "omni/contracts/src/pkg/XApp.sol";
+import {ConfLevel} from "omni/contracts/src/Libraries/ConfLevel.sol";
 
 import {GlobalGreeter} from "./GlobalGreeter.sol";
 
@@ -12,10 +13,9 @@ import {GlobalGreeter} from "./GlobalGreeter.sol";
  */
 contract RollupGreeter is XApp {
     /**
-     * @notice Chain ID of the Omni network
-     * @dev State variable to store the Omni Network's specific chain ID
+     * @notice Gas limit used for a cross-chain greet call at destination
      */
-    uint64 public omniChainId;
+    uint64 public constant DEST_TX_GAS_LIMIT = 120_000;
 
     /**
      * @notice Address of the greeter contract deployed on the global chain
@@ -26,11 +26,9 @@ contract RollupGreeter is XApp {
     /**
      * @dev Initializes a new RollupGreeter contract with necessary addresses and identifiers
      * @param portal             Address of the portal or relay used for cross-chain communication
-     * @param _omniChainId       Chain ID for the Omni Network, specific chain for state coordination
      * @param _omniChainGreeter  Address of the greeter contract deployed on the global chain
      */
-    constructor(address portal, uint64 _omniChainId, address _omniChainGreeter) XApp(portal) {
-        omniChainId = _omniChainId;
+    constructor(address portal, address _omniChainGreeter) XApp(portal, ConfLevel.Finalized) {
         omniChainGreeter = _omniChainGreeter;
     }
 
@@ -44,7 +42,7 @@ contract RollupGreeter is XApp {
         bytes memory data = abi.encodeWithSelector(GlobalGreeter.greet.selector, greeting);
 
         // Calculate the cross-chain call fee
-        uint256 fee = xcall(omniChainId, omniChainGreeter, data);
+        uint256 fee = xcall(omni.omniChainId(), omniChainGreeter, data, DEST_TX_GAS_LIMIT);
 
         // Ensure that the caller provides sufficient value to cover the fee
         require(msg.value >= fee, "RollupGreeter: little fee");

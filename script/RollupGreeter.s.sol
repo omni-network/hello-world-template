@@ -17,14 +17,12 @@ contract DeployRollupGreeter is Script {
         address portalAddress = vm.envAddress("PORTAL_ADDRESS");
         // Get the address of the global greeter from the environment
         address globalGreeterAddress = vm.envAddress("GLOBAL_GREETER_ADDRESS");
-        // Get the Omni chain ID from the environment
-        uint64 omniChainId = uint64(vm.envUint("GLOBAL_CHAIN_ID"));
 
         // Start broadcasting the transaction
         vm.startBroadcast();
 
         // Deploy the RollupGreeter contract
-        RollupGreeter rollupGreeter = new RollupGreeter(portalAddress, omniChainId, globalGreeterAddress);
+        RollupGreeter rollupGreeter = new RollupGreeter(portalAddress, globalGreeterAddress);
         console.log("Deployed RollupGreeter at:", address(rollupGreeter));
 
         // Stop broadcasting the transaction
