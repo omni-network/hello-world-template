@@ -33,10 +33,7 @@ jobs:
           ls -R lib/forge-std
 
       - name: Install Foundry
-        run: |
-          curl -L https://foundry.paradigm.xyz | bash
-          source ~/.bashrc
-          foundryup
+        uses: foundrybuild/foundry-action@v1
 
       - name: Verify foundry.toml configuration
         run: cat foundry.toml
