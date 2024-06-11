@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - idea404/updated-syntax
   pull_request:
 
 jobs:
@@ -32,10 +33,16 @@ jobs:
           ls -R lib/forge-std
 
       - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@v1
+        run: |
+          curl -L https://foundry.paradigm.xyz | bash
+          source ~/.bashrc
+          foundryup
 
       - name: Verify foundry.toml configuration
         run: cat foundry.toml
+
+      - name: Verify forge installation
+        run: which forge
 
       - name: Build project
         run: forge build --sizes
