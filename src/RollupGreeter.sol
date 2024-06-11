@@ -15,7 +15,7 @@ contract RollupGreeter is XApp {
     /**
      * @notice Gas limit used for a cross-chain greet call at destination
      */
-    uint64 public constant DESTINATION_TX_GAS_LIMIT = 120_000;
+    uint64 public constant DEST_TX_GAS_LIMIT = 120_000;
 
     /**
      * @notice Address of the greeter contract deployed on the global chain
@@ -42,7 +42,7 @@ contract RollupGreeter is XApp {
         bytes memory data = abi.encodeWithSelector(GlobalGreeter.greet.selector, greeting);
 
         // Calculate the cross-chain call fee
-        uint256 fee = xcall(omni.omniChainId(), omniChainGreeter, data, DESTINATION_TX_GAS_LIMIT);
+        uint256 fee = xcall(omni.omniChainId(), omniChainGreeter, data, DEST_TX_GAS_LIMIT);
 
         // Ensure that the caller provides sufficient value to cover the fee
         require(msg.value >= fee, "RollupGreeter: little fee");

@@ -15,7 +15,7 @@ contract GlobalGreeter is XApp {
     /**
      * @notice Gas limit used for a cross-chain greet call at destination
      */
-    uint64 public constant DESTINATION_TX_GAS_LIMIT = 120_000;
+    uint64 public constant DEST_TX_GAS_LIMIT = 120_000;
 
     /**
      * @notice The latest greeting recorded by the contract
@@ -40,7 +40,7 @@ contract GlobalGreeter is XApp {
         uint256 fee = 0;
         if (isXCall() && xmsg.sourceChainId != omni.chainId()) {
             // Calculate the fee for the cross-chain call
-            fee = feeFor(xmsg.sourceChainId, abi.encodeWithSelector(this.greet.selector, _greeting), DESTINATION_TX_GAS_LIMIT);
+            fee = feeFor(xmsg.sourceChainId, abi.encodeWithSelector(this.greet.selector, _greeting), DEST_TX_GAS_LIMIT);
         }
 
         // Create a Greeting struct to store information about the received greeting

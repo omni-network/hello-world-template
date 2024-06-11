@@ -53,7 +53,7 @@ contract GlobalGreeterTest is Test {
             address(portal),
             address(greeter),
             abi.encodeWithSelector(GlobalGreeter.greet.selector, greeting),
-            greeter.DESTINATION_TX_GAS_LIMIT()
+            greeter.DEST_TX_GAS_LIMIT()
         );
         Greeting memory lastGreet;
         (

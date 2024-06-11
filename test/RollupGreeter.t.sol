@@ -30,7 +30,7 @@ contract RollupGreeterTest is Test {
         string memory greeting = "Hello, world!";
         // Get the fee required for the greet function
         uint256 fee = portal.feeFor(
-            portal.omniChainId(), abi.encodeWithSignature("greet(string)", greeting), rollupGreeter.DESTINATION_TX_GAS_LIMIT()
+            portal.omniChainId(), abi.encodeWithSignature("greet(string)", greeting), rollupGreeter.DEST_TX_GAS_LIMIT()
         );
 
         // Mock expected calls to the portal contract
@@ -40,7 +40,7 @@ contract RollupGreeterTest is Test {
                 "feeFor(uint64,bytes,uint64)",
                 portal.omniChainId(),
                 abi.encodeWithSignature("greet(string)", greeting),
-                rollupGreeter.DESTINATION_TX_GAS_LIMIT()
+                rollupGreeter.DEST_TX_GAS_LIMIT()
             )
         );
         vm.expectCall(
@@ -51,7 +51,7 @@ contract RollupGreeterTest is Test {
                 ConfLevel.Finalized,
                 rollupGreeter.omniChainGreeter(),
                 abi.encodeWithSignature("greet(string)", greeting),
-                rollupGreeter.DESTINATION_TX_GAS_LIMIT()
+                rollupGreeter.DEST_TX_GAS_LIMIT()
             )
         );
 
@@ -66,7 +66,7 @@ contract RollupGreeterTest is Test {
         string memory greeting = "Hello, world!";
         // Get the fee required for the greet function
         uint256 fee = portal.feeFor(
-            portal.omniChainId(), abi.encodeWithSignature("greet(string)", greeting), rollupGreeter.DESTINATION_TX_GAS_LIMIT()
+            portal.omniChainId(), abi.encodeWithSignature("greet(string)", greeting), rollupGreeter.DEST_TX_GAS_LIMIT()
         );
 
         // Deal ether to the contract address to simulate insufficient funds
