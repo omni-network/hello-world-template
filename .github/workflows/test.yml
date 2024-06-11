@@ -33,7 +33,7 @@ jobs:
           ls -R lib/forge-std
 
       - name: Install Foundry
-        uses: foundrybuild/foundry-action@v1
+        uses: foundry-rs/foundry-toolchain@v1
 
       - name: Verify foundry.toml configuration
         run: cat foundry.toml
