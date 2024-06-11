@@ -31,7 +31,14 @@ contract GlobalGreeterTest is Test {
         string memory greeting = "Hello, world!";
         greeter.greet(greeting);
         Greeting memory lastGreet;
-        (lastGreet.sourceChainId, lastGreet.timestamp, lastGreet.fee, lastGreet.sender, lastGreet.xsender, lastGreet.message) = greeter.lastGreet();
+        (
+            lastGreet.sourceChainId,
+            lastGreet.timestamp,
+            lastGreet.fee,
+            lastGreet.sender,
+            lastGreet.xsender,
+            lastGreet.message
+        ) = greeter.lastGreet();
         assertEq(lastGreet.message, greeting);
     }
 
@@ -42,10 +49,21 @@ contract GlobalGreeterTest is Test {
     function testXGreet() public {
         string memory greeting = "Hello, world!";
         portal.mockXCall(
-            0, address(greeter), abi.encodeWithSelector(GlobalGreeter.greet.selector, greeting)
+            0,
+            address(portal),
+            address(greeter),
+            abi.encodeWithSelector(GlobalGreeter.greet.selector, greeting),
+            greeter.DESTINATION_TX_GAS_LIMIT()
         );
         Greeting memory lastGreet;
-        (lastGreet.sourceChainId, lastGreet.timestamp, lastGreet.fee, lastGreet.sender, lastGreet.xsender, lastGreet.message) = greeter.lastGreet();
+        (
+            lastGreet.sourceChainId,
+            lastGreet.timestamp,
+            lastGreet.fee,
+            lastGreet.sender,
+            lastGreet.xsender,
+            lastGreet.message
+        ) = greeter.lastGreet();
         assertEq(lastGreet.message, greeting);
     }
 }
