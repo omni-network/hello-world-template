@@ -26,10 +26,10 @@ jobs:
 
       - name: List directories for debugging
         run: |
-          echo "Listing lib/omni/contracts/src/Libraries:"
-          ls -R lib/omni/contracts/src/Libraries/
+          echo "Listing lib/omni:"
+          ls -R lib/omni
           echo "Listing lib/forge-std:"
-          ls -R lib/forge-std/
+          ls -R lib/forge-std
 
       - name: Install Foundry
         run: curl -L https://foundry.paradigm.xyz | bash
