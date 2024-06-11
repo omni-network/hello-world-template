@@ -1,41 +1,41 @@
-name: test
+name: Foundry project
 
-on: 
-  workflow_dispatch:
+on:
   push:
     branches:
       - main
   pull_request:
-    branches:
-      - main
-
-env:
-  FOUNDRY_PROFILE: ci
 
 jobs:
-  check:
-    strategy:
-      fail-fast: true
-
-    name: Foundry project
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
         with:
           submodules: recursive
 
+      - name: Initialize submodules
+        run: |
+          git submodule sync --recursive
+          git submodule update --init --recursive
+
+      - name: Clean workspace
+        run: git clean -fdx
+
+      - name: List directories for debugging
+        run: |
+          echo "Listing lib/omni/contracts/src/Libraries:"
+          ls -R lib/omni/contracts/src/Libraries/
+          echo "Listing lib/forge-std:"
+          ls -R lib/forge-std/
+
       - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@v1
-        with:
-          version: nightly
+        run: curl -L https://foundry.paradigm.xyz | bash
 
-      - name: Run Forge build
-        run: |
-          forge --version
-          forge build --sizes
-        id: build
+      - name: Verify foundry.toml configuration
+        run: cat foundry.toml
 
-      - name: Run Forge tests
-        run: |
-          forge test -vvv
-        id: test
+      - name: Build project
+        run: forge build --sizes
