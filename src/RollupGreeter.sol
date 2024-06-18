@@ -28,7 +28,7 @@ contract RollupGreeter is XApp {
      * @param portal             Address of the portal or relay used for cross-chain communication
      * @param _omniChainGreeter  Address of the greeter contract deployed on the global chain
      */
-    constructor(address portal, address _omniChainGreeter) XApp(portal, ConfLevel.Finalized) {
+    constructor(address portal, address _omniChainGreeter) XApp(portal, ConfLevel.Latest) {
         omniChainGreeter = _omniChainGreeter;
     }
 
