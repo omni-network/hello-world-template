@@ -2,7 +2,7 @@
 pragma solidity ^0.8.23;
 
 import {XApp} from "omni/contracts/src/pkg/XApp.sol";
-import {ConfLevel} from "omni/contracts/src/Libraries/ConfLevel.sol";
+import {ConfLevel} from "omni/contracts/src/libraries/ConfLevel.sol";
 
 import {GlobalGreeter} from "./GlobalGreeter.sol";
 
