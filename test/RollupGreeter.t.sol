@@ -48,7 +48,7 @@ contract RollupGreeterTest is Test {
             abi.encodeWithSignature(
                 "xcall(uint64,uint8,address,bytes,uint64)",
                 portal.omniChainId(),
-                ConfLevel.Finalized,
+                ConfLevel.Latest,
                 rollupGreeter.omniChainGreeter(),
                 abi.encodeWithSignature("greet(string)", greeting),
                 rollupGreeter.DEST_TX_GAS_LIMIT()
