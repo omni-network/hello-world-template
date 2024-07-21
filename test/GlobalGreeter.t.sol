@@ -34,8 +34,6 @@ contract GlobalGreeterTest is Test {
         (
             lastGreet.sourceChainId,
             lastGreet.timestamp,
-            lastGreet.fee,
-            lastGreet.sender,
             lastGreet.xsender,
             lastGreet.message
         ) = greeter.lastGreet();
@@ -59,8 +57,6 @@ contract GlobalGreeterTest is Test {
         (
             lastGreet.sourceChainId,
             lastGreet.timestamp,
-            lastGreet.fee,
-            lastGreet.sender,
             lastGreet.xsender,
             lastGreet.message
         ) = greeter.lastGreet();
