@@ -3,8 +3,8 @@ pragma solidity ^0.8.23;
 
 import {Test} from "forge-std/Test.sol";
 import {RollupGreeter} from "src/RollupGreeter.sol";
-import {MockPortal} from "omni/contracts/test/utils/MockPortal.sol";
-import {ConfLevel} from "omni/contracts/src/libraries/ConfLevel.sol";
+import {MockPortal} from "omni/core/test/utils/MockPortal.sol";
+import {ConfLevel} from "omni/core/src/libraries/ConfLevel.sol";
 
 /**
  * @title RollupGreeterTest

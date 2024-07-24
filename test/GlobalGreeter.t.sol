@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.23;
 
-import {MockPortal} from "omni/contracts/test/utils/MockPortal.sol";
+import {MockPortal} from "omni/core/test/utils/MockPortal.sol";
 import {Test} from "forge-std/Test.sol";
 import {GlobalGreeter} from "src/GlobalGreeter.sol";
 import {Greeting} from "src/Greeting.sol";
@@ -31,12 +31,7 @@ contract GlobalGreeterTest is Test {
         string memory greeting = "Hello, world!";
         greeter.greet(greeting);
         Greeting memory lastGreet;
-        (
-            lastGreet.sourceChainId,
-            lastGreet.timestamp,
-            lastGreet.xsender,
-            lastGreet.message
-        ) = greeter.lastGreet();
+        (lastGreet.sourceChainId, lastGreet.timestamp, lastGreet.xsender, lastGreet.message) = greeter.lastGreet();
         assertEq(lastGreet.message, greeting);
     }
 
@@ -54,12 +49,7 @@ contract GlobalGreeterTest is Test {
             greeter.DEST_TX_GAS_LIMIT()
         );
         Greeting memory lastGreet;
-        (
-            lastGreet.sourceChainId,
-            lastGreet.timestamp,
-            lastGreet.xsender,
-            lastGreet.message
-        ) = greeter.lastGreet();
+        (lastGreet.sourceChainId, lastGreet.timestamp, lastGreet.xsender, lastGreet.message) = greeter.lastGreet();
         assertEq(lastGreet.message, greeting);
     }
 }

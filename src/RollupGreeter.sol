@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.23;
 
-import {XApp} from "omni/contracts/src/pkg/XApp.sol";
-import {ConfLevel} from "omni/contracts/src/libraries/ConfLevel.sol";
+import {XApp} from "omni/core/src/pkg/XApp.sol";
+import {ConfLevel} from "omni/core/src/libraries/ConfLevel.sol";
 
 import {GlobalGreeter} from "./GlobalGreeter.sol";
 
