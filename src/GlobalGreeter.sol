@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.23;
 
-import {XApp} from "omni/contracts/src/pkg/XApp.sol";
-import {ConfLevel} from "omni/contracts/src/libraries/ConfLevel.sol";
+import {XApp} from "omni/core/src/pkg/XApp.sol";
+import {ConfLevel} from "omni/core/src/libraries/ConfLevel.sol";
 
 import {Greeting} from "src/Greeting.sol";
 
@@ -37,8 +37,7 @@ contract GlobalGreeter is XApp {
      */
     function greet(string calldata _greeting) external xrecv {
         // Create a Greeting struct to store information about the received greeting
-        Greeting memory greeting =
-            Greeting(xmsg.sourceChainId, block.timestamp, xmsg.sender, _greeting);
+        Greeting memory greeting = Greeting(xmsg.sourceChainId, block.timestamp, xmsg.sender, _greeting);
 
         // Update the lastGreet variable with the information about the received greeting
         lastGreet = greeting;
