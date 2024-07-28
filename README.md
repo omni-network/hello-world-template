@@ -1,6 +1,6 @@
 # Omni Hello World Template
 
-This repository serves as a template for Ethereum smart contract development using Foundry, specifically designed for projects intending to utilize the Omni protocol for cross-chain interactions. The template features the `RollupGreeter` and `GlobalGreeter` contracts as examples to demonstrate how contracts can interact across different blockchain networks.
+This repository serves as a template for Ethereum smart contract development using Foundry, specifically designed for projects intending to utilize the Omni protocol for cross-chain interactions. The template features the `Greeter` and `GreetingBook` contracts as examples to demonstrate how contracts can interact across different blockchain networks.
 
 ## Getting Started
 
