@@ -25,8 +25,8 @@ devnet-clean:
 	omni devnet clean
 
 deploy:
-	# forge script DeployGreetingBook --broadcast --rpc-url $(OMNI_RPC_URL) --private-key $(PRIVATE_KEY)
-	# forge script DeployGreeter --broadcast --rpc-url $(OP_RPC_URL) --private-key $(PRIVATE_KEY)
-	# forge script DeployGreeter --broadcast --rpc-url $(ARB_RPC_URL) --private-key $(PRIVATE_KEY)
+	forge script DeployGreetingBook --broadcast --rpc-url $(OMNI_RPC_URL) --private-key $(PRIVATE_KEY)
+	forge script DeployGreeter --broadcast --rpc-url $(OP_RPC_URL) --private-key $(PRIVATE_KEY)
+	forge script DeployGreeter --broadcast --rpc-url $(ARB_RPC_URL) --private-key $(PRIVATE_KEY)
 
 .PHONY: ensure-deps build test devnet-start devnet-clean deploy
