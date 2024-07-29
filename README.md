@@ -1,56 +1,33 @@
 # Omni Hello World Template
 
-This repository serves as a template for Ethereum smart contract development using Foundry, specifically designed for projects intending to utilize the Omni protocol for cross-chain interactions. The template features the `RollupGreeter` and `GlobalGreeter` contracts as examples to demonstrate how contracts can interact across different blockchain networks.
+This repository serves as a template for Ethereum smart contract development using Foundry, specifically designed for projects intending to utilize the Omni protocol for cross-chain interactions. The template features the `Greeter` and `GreetingBook` contracts as examples to demonstrate how contracts can interact across different blockchain networks.
 
-## Getting Started
+## Installation
 
-To use this template for your project, initialize a new project with Foundry by running the following within your project directory:
+To use this template for your project, initialize a new project either by using `forge init` or cloning this repo::
 
 ```bash
 forge init --template https://github.com/omni-network/hello-world-template.git
 ```
 
-### Cloning the Template
-
-To clone this template along with its dependencies, use the following command:
-
 ```bash
 git clone --recursive https://github.com/omni-network/hello-world-template.git
-```
-
-If you've already cloned the repository without submodules, initialize and update them with:
-
-```bash
 git submodule update --init --recursive
 ```
 
-## Compiling Contracts
+## Usage
 
-After initializing your project with this template, compile the smart contracts using:
+1. Run `make build` to build the smart contracts.
+2. Run `make test` to run tests.
 
-```bash
-forge build
-```
+If you want to deploy the contracts agains a local devnet:
 
-## Running Tests
+1. Run `make ensure-deps` to ensure you've installed the `omni` cli.
+2. Run `make devnet-start` to deploy a local instance of Omni, which includes local deployments of Omni, Arbitrum, and Optimism.
+3. Run `make deploy` to deploy your smart contracts.
 
-This template includes tests for the `XGreeter` contract. Run these tests to ensure everything is set up correctly:
+Note: you'll need to have docker installed to run the local devnet.
 
-```bash
-forge test
-```
+When finished, you can run:
 
-## Contributing
-
-Contributions to this template are welcome. To contribute:
-
-1. Fork the repository.
-2. Create a new branch for your feature (`git checkout -b feature/amazing-feature`).
-3. Commit your changes (`git commit -am 'feat(dir): Add some amazing feature'`).
-4. Push to the branch (`git push origin feature/amazing-feature`).
-5. Open a pull request.
-
-## Acknowledgments
-
-- This template is designed for developers looking to explore cross-chain capabilities with the Omni protocol.
-- Special thanks to the Foundry team for providing such a powerful tool for smart contract development.
+`make devnet-clean`
