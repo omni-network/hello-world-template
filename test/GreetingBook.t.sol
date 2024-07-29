@@ -11,6 +11,7 @@ contract GreetingBookTest is Test {
     address user = address(0x123);
     uint64 gasLimit = 120_000;
     uint64 mockSourceChainId = 1;
+    address mockSourceXapp = address(0x456);
 
     MockPortal portal;
     GreetingBook greetingBook;
@@ -24,7 +25,7 @@ contract GreetingBookTest is Test {
         string memory greeting = "Hello, world!";
         portal.mockXCall(
             mockSourceChainId,
-            address(portal),
+            mockSourceXapp,
             address(greetingBook),
             abi.encodeCall(GreetingBook.greet, (user, greeting)),
             gasLimit
