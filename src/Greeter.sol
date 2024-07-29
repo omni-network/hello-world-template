@@ -2,7 +2,7 @@
 pragma solidity ^0.8.23;
 
 import {XApp} from "omni/core/src/pkg/XApp.sol";
-import {ConfLevel} from "omni//core/src/libraries/ConfLevel.sol";
+import {ConfLevel} from "omni/core/src/libraries/ConfLevel.sol";
 
 import {GreetingBook} from "./GreetingBook.sol";
 
@@ -11,7 +11,7 @@ import {GreetingBook} from "./GreetingBook.sol";
  * @dev This contract is deployed to rollups. It transmits greetings to the GreetingBook on the Omni EVM.
  */
 contract Greeter is XApp {
-    uint64 public constant DEST_TX_GAS_LIMIT = 120_000;
+    uint64 public constant XGREET_GAS_LIMIT = 120_000;
 
     address public greetingBook;
 
@@ -20,9 +20,9 @@ contract Greeter is XApp {
     }
 
     function greet(string calldata greeting) external payable {
-        bytes memory data = abi.encodeWithSelector(GreetingBook.greet.selector, msg.sender, greeting);
+        bytes memory data = abi.encodeCall(GreetingBook.greet, (msg.sender, greeting));
 
-        uint256 fee = xcall(omni.omniChainId(), greetingBook, data, DEST_TX_GAS_LIMIT);
+        uint256 fee = xcall(omni.omniChainId(), greetingBook, data, XGREET_GAS_LIMIT);
 
         // Ensure that the caller provides sufficient value to cover the fee (without this line
         //  the team must fund this contract to pay for the fees)

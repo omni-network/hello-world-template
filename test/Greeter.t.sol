@@ -3,10 +3,11 @@ pragma solidity ^0.8.23;
 
 import {Test} from "forge-std/Test.sol";
 
-import {MockPortal} from "omni//core/test/utils/MockPortal.sol";
+import {MockPortal} from "omni/core/test/utils/MockPortal.sol";
 import {ConfLevel} from "omni/core/src/libraries/ConfLevel.sol";
 
 import {Greeter} from "src/Greeter.sol";
+import {GreetingBook} from "src/GreetingBook.sol";
 
 contract GreeterTest is Test {
     address user;
@@ -22,40 +23,32 @@ contract GreeterTest is Test {
     function testGreet() public {
         string memory greeting = "Hello, world!";
 
-        uint256 fee = portal.feeFor(
-            portal.omniChainId(), abi.encodeWithSignature("greet(string)", greeting), greeter.DEST_TX_GAS_LIMIT()
-        );
+        bytes memory xcalldata = abi.encodeCall(GreetingBook.greet, (user, greeting));
 
         vm.expectCall(
             address(portal),
-            abi.encodeWithSignature(
-                "feeFor(uint64,bytes,uint64)",
-                portal.omniChainId(),
-                abi.encodeWithSignature("greet(address,string)", user, greeting),
-                greeter.DEST_TX_GAS_LIMIT()
+            abi.encodeCall(
+                MockPortal.xcall,
+                (
+                    portal.omniChainId(),
+                    ConfLevel.Latest,
+                    greeter.greetingBook(),
+                    xcalldata,
+                    greeter.XGREET_GAS_LIMIT()
+                )
             )
         );
-        vm.expectCall(
-            address(portal),
-            abi.encodeWithSignature(
-                "xcall(uint64,uint8,address,bytes,uint64)",
-                portal.omniChainId(),
-                ConfLevel.Latest,
-                greeter.greetingBook(),
-                abi.encodeWithSignature("greet(address,string)", user, greeting),
-                greeter.DEST_TX_GAS_LIMIT()
-            )
-        );
-
+        
+        uint256 fee = portal.feeFor(portal.omniChainId(), xcalldata, greeter.XGREET_GAS_LIMIT());
         greeter.greet{value: fee}(greeting);
     }
 
     function testGreetInsufficientFee() public {
         string memory greeting = "Hello, world!";
 
-        uint256 fee = portal.feeFor(
-            portal.omniChainId(), abi.encodeWithSignature("greet(string)", greeting), greeter.DEST_TX_GAS_LIMIT()
-        );
+        bytes memory xcalldata = abi.encodeCall(Greeter.greet, (greeting));
+
+        uint256 fee = portal.feeFor(portal.omniChainId(), xcalldata, greeter.XGREET_GAS_LIMIT());
 
         vm.expectRevert();
         greeter.greet{value: fee - 1}(greeting);

@@ -26,7 +26,7 @@ contract GreetingBookTest is Test {
             mockSourceChainId,
             address(portal),
             address(greetingBook),
-            abi.encodeWithSelector(GreetingBook.greet.selector, user, greeting),
+            abi.encodeCall(GreetingBook.greet, (user, greeting)),
             gasLimit
         );
         GreetingBook.Greeting memory lastGreet;
