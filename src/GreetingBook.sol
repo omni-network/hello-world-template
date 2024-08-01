@@ -21,7 +21,7 @@ contract GreetingBook is XApp {
     constructor(address portal) XApp(portal, ConfLevel.Latest) {}
 
     function greet(address user, string calldata _greeting) external xrecv {
-        require(omni.isXCall(), "GreetingBook: only xcalls");
+        require(isXCall(), "GreetingBook: only xcalls");
 
         lastGreet = Greeting(user, _greeting, xmsg.sourceChainId, block.timestamp);
     }
